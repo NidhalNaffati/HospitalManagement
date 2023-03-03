@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 
 @Service
@@ -30,8 +29,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void deleteDoctor(Doctor doctor) {
-        doctorRepository.delete(doctor);
+    public void deleteDoctor(long id) {
+        doctorRepository.deleteById(id);
     }
 
     @Override
@@ -56,11 +55,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Page<Doctor> getAllDoctorsByFirstNameOrLastName(String firstOrLastName, Pageable pageable) {
-        return doctorRepository.findByFirstNameContainingOrLastNameContaining(firstOrLastName, firstOrLastName, pageable);
+        return doctorRepository.findByFirstNameContainingOrLastNameContaining(firstOrLastName, pageable);
     }
 
-    @Override
-    public List<Doctor> getDoctors() {
-        return doctorRepository.findAll();
-    }
 }

@@ -16,7 +16,7 @@ public interface DoctorService {
 
     Doctor updateDoctor(Doctor doctor);
 
-    void deleteDoctor(Doctor doctor);
+    void deleteDoctor(long id);
 
     Doctor getDoctorById(Long id);
 
@@ -28,5 +28,4 @@ public interface DoctorService {
 
     Page<Doctor> getAllDoctorsByFirstNameOrLastName(String firstOrLastName, Pageable pageable);
 
-    List<Doctor> getDoctors();
 }
