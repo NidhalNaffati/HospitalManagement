@@ -15,7 +15,7 @@
                 <h3 class="text-center text-dark mb-4">Team</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">Employee Info</p>
+                        <p class="text-primary m-0 fw-bold">Doctors Info</p>
                     </div>
                     <div class="card-body">
 
@@ -84,18 +84,23 @@
                                 <p>Total Doctors [[${totalDoctors}]] &nbsp; </p>
                             </div>
 
+                            <!-- This is a navigation bar with pagination links for a list of doctors.
+                             It includes links to the first and last pages, as well as links for each page in between.
+                              The links have speciality and page parameters in the URL, depending on user selection.-->
                             <div class="col-md-6 ">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item "><a class="page-link" aria-label="Previous"
-                                                                  th:href="${'/doctors?page=1'}"><span
+                                        <li class="page-item"><a class="page-link" aria-label="Previous"
+                                                                 th:href="${speciality != null ? '/doctors/' + speciality + '?page=1' : '/doctors?page=1'}"><span
                                                 aria-hidden="true">First</span></a></li>
                                         <li class="page-item {{currentPage == i ? 'active' : ''}}"
                                             th:each="p : ${#numbers.sequence(1, totalPages)}">
-                                            <a class="page-link" th:href="${'/doctors?page=' + p}" th:text="${p}"></a>
+                                            <a class="page-link"
+                                               th:href="${speciality != null ? '/doctors/' + speciality + '?page=' + p : '/doctors?page=' + p}"
+                                               th:text="${p}"></a>
                                         </li>
                                         <li class="page-item"><a class="page-link" aria-label="Next"
-                                                                 th:href="${'/doctors?page=' + totalPages}"><span
+                                                                 th:href="${speciality != null ? '/doctors/' + speciality + '?page=' + totalPages : '/doctors?page=' + totalPages}"><span
                                                 aria-hidden="true">Last</span></a></li>
                                     </ul>
                                 </nav>

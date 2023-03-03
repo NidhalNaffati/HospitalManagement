@@ -1,6 +1,6 @@
 package nidhal.hospitalmanagement.entity;
 
-public enum DoctorSpecialization {
+public enum DoctorSpeciality {
     // TODO: change the sql insertion
     PSYCHIATRY,
     CARDIOLOGY,

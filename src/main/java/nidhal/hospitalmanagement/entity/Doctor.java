@@ -19,7 +19,7 @@ import org.hibernate.annotations.Table;
 @DiscriminatorValue("doctor")
 public class Doctor extends Person {
     @Enumerated(EnumType.STRING)
-    private DoctorSpecialization specialization;
+    private DoctorSpeciality specialization;
 
 
 }

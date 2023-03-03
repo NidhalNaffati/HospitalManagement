@@ -2,12 +2,10 @@ package nidhal.hospitalmanagement.service;
 
 
 import nidhal.hospitalmanagement.entity.Doctor;
-import nidhal.hospitalmanagement.entity.DoctorSpecialization;
+import nidhal.hospitalmanagement.entity.DoctorSpeciality;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
@@ -24,7 +22,7 @@ public interface DoctorService {
 
     Page<Doctor> getAllDoctors(Pageable pageable);
 
-    Page<Doctor> getAllDoctorsBySpecialization(DoctorSpecialization specialization, Pageable pageable);
+    Page<Doctor> getDoctorsBySpeciality(DoctorSpeciality specialization, Pageable pageable);
 
     Page<Doctor> getAllDoctorsByFirstNameOrLastName(String firstOrLastName, Pageable pageable);
 

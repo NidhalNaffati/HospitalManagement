@@ -1,7 +1,7 @@
 package nidhal.hospitalmanagement.service;
 
 import nidhal.hospitalmanagement.entity.Doctor;
-import nidhal.hospitalmanagement.entity.DoctorSpecialization;
+import nidhal.hospitalmanagement.entity.DoctorSpeciality;
 import nidhal.hospitalmanagement.repository.DoctorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +49,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Page<Doctor> getAllDoctorsBySpecialization(DoctorSpecialization specialization, Pageable pageable) {
+    public Page<Doctor> getDoctorsBySpeciality(DoctorSpeciality specialization, Pageable pageable) {
         return doctorRepository.findBySpecialization(specialization, pageable);
     }
 

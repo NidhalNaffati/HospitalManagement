@@ -1,6 +1,7 @@
 package nidhal.hospitalmanagement.controller;
 
 import nidhal.hospitalmanagement.entity.Doctor;
+import nidhal.hospitalmanagement.entity.DoctorSpeciality;
 import nidhal.hospitalmanagement.service.DoctorServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,9 +27,34 @@ public class DoctorController {
     public String getDoctors(Model model, @RequestParam(defaultValue = "1") int page) {
 
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
+
         Page<Doctor> doctorPage = doctorService.getAllDoctors(pageable);
+
+        return passTheDoctorsInfoToTheFrontEnd(model, page, doctorPage);
+    }
+
+    @GetMapping("/doctors/{speciality}")
+    public String getDoctorsBySpeciality(
+            Model model, @PathVariable DoctorSpeciality speciality,
+            @RequestParam(defaultValue = "1") int page) {
+
+
+
+        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
+        Page<Doctor> doctorPage = doctorService.getDoctorsBySpeciality(speciality, pageable);
+
+        return passTheDoctorsInfoToTheFrontEnd(model, page, doctorPage);
+    }
+
+    private String passTheDoctorsInfoToTheFrontEnd(
+            Model model,
+            @RequestParam(defaultValue = "1") int page,
+            Page<Doctor> doctorPage) {
+
         List<Doctor> doctorList = doctorPage.getContent();
+
         int totalPages = doctorPage.getTotalPages();
+
         int totalDoctors = (int) doctorPage.getTotalElements();
 
         model.addAttribute("totalDoctors", totalDoctors);
