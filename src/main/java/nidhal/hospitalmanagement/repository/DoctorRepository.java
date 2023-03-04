@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
@@ -19,9 +21,16 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     @Query("DELETE FROM Doctor d WHERE d.id = ?1")
     void deleteById(Long id);
 
-    @Query("SELECT d FROM Doctor d WHERE d.specialization = ?1")
+    @Query("SELECT d FROM Doctor d WHERE d.speciality = ?1")
     Page<Doctor> findBySpecialization(DoctorSpeciality specialization, Pageable pageable);
+
+    @Query("SELECT DISTINCT d.speciality FROM Doctor d")
+    List<DoctorSpeciality> findAllSpecialities();
 
     @Query("SELECT d FROM Doctor d WHERE d.firstName LIKE %?1% OR d.lastName LIKE %?1%")
     Page<Doctor> findByFirstNameContainingOrLastNameContaining(String firstOrLastName, Pageable pageable);
+
+
+    @Query("SELECT COUNT(d) FROM Doctor d WHERE d.speciality = ?1")
+    int countBySpeciality(DoctorSpeciality specialization);
 }

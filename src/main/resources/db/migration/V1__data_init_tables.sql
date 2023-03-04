@@ -14,8 +14,8 @@ create table if not exists person
 
 create table if not exists doctor
 (
-    specialization varchar(50),
-    id             bigint not null,
+    speciality varchar(50),
+    id         bigint not null,
     primary key (id)
 );
 
@@ -95,7 +95,7 @@ VALUES (1, 'doctor', 'John', 'Doe', 'johndoe@example.com', '123 Main St', 'MALE'
        (19, 'doctor', 'Daniel', 'Roberts', 'danielroberts@example.com', '4041 Elm St', 'MALE', '2023-03-24'),
        (20, 'doctor', 'Madison', 'Turner', 'madisonturner@example.com', '4243 Pine St', 'FEMALE', '2023-03-24');
 
-INSERT INTO HospitalManagementDB.doctor (id, specialization)
+INSERT INTO HospitalManagementDB.doctor (id, speciality)
 VALUES (1, 'PSYCHIATRY'),
        (2, 'CARDIOLOGY'),
        (3, 'DERMATOLOGY'),

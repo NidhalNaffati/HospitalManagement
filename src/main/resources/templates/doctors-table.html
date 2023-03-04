@@ -38,7 +38,7 @@
                                     <th>Name</th>
                                     <th>Gender</th>
                                     <th>Address</th>
-                                    <th>Specialization</th>
+                                    <th>Speciality</th>
                                     <th>DOB</th>
                                     <th>Action</th>
                                 </tr>
@@ -53,7 +53,7 @@
                                     </td>
                                     <td th:text="${doctor.gender}"/>
                                     <td th:text="${doctor.address}"/>
-                                    <td th:text="${doctor.specialization}"/>
+                                    <td th:text="${doctor.speciality}"/>
                                     <td th:text="${#dates.format(doctor.dayOfBirth, 'dd-MM-yyyy')}"/>
                                     <td>
                                         <a th:href="${'/doctor/edit/' + doctor.id}" th:title="edit">

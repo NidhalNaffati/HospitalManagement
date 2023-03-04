@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 
 @Service
 public interface DoctorService {
@@ -25,5 +28,9 @@ public interface DoctorService {
     Page<Doctor> getDoctorsBySpeciality(DoctorSpeciality specialization, Pageable pageable);
 
     Page<Doctor> getAllDoctorsByFirstNameOrLastName(String firstOrLastName, Pageable pageable);
+
+    List<DoctorSpeciality> getAllSpecialities();
+
+    Map<DoctorSpeciality, Integer> getNumberOfDoctorsForEachSpeciality();
 
 }
