@@ -35,7 +35,7 @@ public class Person {
     @Email(message = "Email must be a valid email address")
     private String email;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dayOfBirth;
 
     @NotBlank(message = "Address is required")
