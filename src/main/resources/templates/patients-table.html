@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+
+<head th:replace="~{common/common :: common-header}">
+    <title>Page Not Found - Brand</title>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav th:replace="~{common/common :: side-bar}"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="~{common/common :: top-bar}"></nav>
+
+            <div class="container-fluid">
+                <h3 class="text-center text-dark mb-4">Team</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold">Doctors Info</p>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-auto">
+                                <div class="text-md-end dataTables_filter" id="dataTable_filter">
+                                    <label class="form-label">
+                                        <input type="search" class="form-control form-control-sm"
+                                               aria-controls="dataTable"
+                                               placeholder="Search">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive table mt-2" role="grid"
+                             aria-describedby="dataTable_info">
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>DOB</th>
+                                    <th>Email</th>
+                                    <th>Family Email</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="patient: ${patientList}">
+                                    <td>
+                                        <img class="rounded-circle me-2" width="30" height="30"
+                                             src="/img/avatars/avatar1.jpeg" alt="avatar-img"/>
+                                        <a th:text="${patient.firstName}"/>
+                                    </td>
+                                    <td th:text="${patient.lastName}"/>
+                                    <td th:text="${patient.gender}"/>
+                                    <td th:text="${patient.address}"/>
+                                    <td th:text="${#dates.format(patient.dayOfBirth, 'dd-MM-yyyy')}"/>
+                                    <td th:text="${patient.email}"/>
+                                    <td th:text="${patient.familyEmail}"/>
+
+                                    <!--  delete or update patient-->
+                                    <td>
+                                        <a th:href="${'/patient/edit/' + patient.id}" th:title="edit">
+                                            <i class="fas fa-edit" alt="edit"></i>
+                                        </a>
+
+                                        <a th:href="${'/patient/delete/' + patient.id}" th:title="delete"
+                                           onclick="return confirm('Are you sure!! You want to delete this patient')">
+                                            <i class="fas fa-trash" alt="delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>DOB</th>
+                                    <th>Email</th>
+                                    <th>Family Email</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-nowrap">
+                                <p>Total Patients [[${totalPatients}]] &nbsp; </p>
+                            </div>
+
+
+                            <div class="col-md-6 ">
+                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+
+                                    <ul class="pagination">
+                                        <li class="page-item ">
+                                            <a class="page-link" aria-label="Previous"
+                                               th:href="${'/patients?page=1'}">
+                                                <span aria-hidden="true">First</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item {{currentPage == i ? 'active' : ''}}"
+                                            th:each="p : ${#numbers.sequence(1, totalPages)}">
+                                            <a class="page-link" th:href="${'/patients?page=' + p}" th:text="${p}"></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Next"
+                                               th:href="${'/patients?page=' + totalPages}">
+                                                <span aria-hidden="true"> Last </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="~{common/common :: footer}"></footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<div th:replace="~{common/common :: body-bottom-scripts}"></div>
+</body>
+</html>

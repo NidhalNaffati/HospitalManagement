@@ -15,7 +15,6 @@ public class PatientServiceImpl implements PatientService {
         this.patientRepository = patientRepository;
     }
 
-
     @Override
     public Patient savePatient(Patient patient) {
         return null;
@@ -28,7 +27,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void deletePatient(long id) {
-
+        patientRepository.deleteById(id);
     }
 
     @Override
@@ -43,6 +42,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Page<Patient> getAllPatients(Pageable pageable) {
-        return null;
+        return patientRepository.findAll(pageable);
     }
 }
