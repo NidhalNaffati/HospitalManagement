@@ -22,6 +22,5 @@ public class Patient extends Person {
 
     private String familyEmail;
 
-    private int familyPhoneNumber;
 
 }

@@ -1,79 +1,10 @@
-create table if not exists person
-(
-    person_type  varchar(50) not null,
-    id           bigint      not null,
-    address      varchar(50),
-    day_of_birth datetime(6),
-    email        varchar(50),
-    first_name   varchar(50),
-    gender       varchar(50),
-    last_name    varchar(50),
-    primary key (id)
-);
+insert into person_seq
+values (1001);
 
-
-create table if not exists doctor
-(
-    speciality varchar(50),
-    id         bigint not null,
-    primary key (id)
-);
-
-
-create table if not exists patient
-(
-    family_email        varchar(50),
-    family_phone_number integer not null,
-    id                  bigint  not null,
-    primary key (id)
-);
-
-create table if not exists medical_record
-(
-    id               bigint    not null auto_increment,
-    blood_pressure   float(23) not null,
-    blood_type       varchar(255),
-    heart_rate       float(23) not null,
-    height           float(23) not null,
-    respiratory_rate float(23) not null,
-    sugar_level      float(23) not null,
-    surgeries        smallint  not null,
-    weight           float(23) not null,
-    patient_id       bigint,
-    primary key (id)
-);
-
-
-
-create table if not exists person_seq
-(
-    next_val bigint
-);
-
-
-alter table doctor
-    add constraint FKop6cku1inyqn8son2ki4cgqdh
-        foreign key (id)
-            references person (id);
-
-
-alter table medical_record
-    add constraint FKt0lf3feuiurr73bpln2n6x0v
-        foreign key (patient_id)
-            references patient (id);
-
-
-alter table patient
-    add constraint FKaxjru7sr936i3y7dy396vnon8
-        foreign key (id)
-            references person (id);
-
-
--- doctor insertion.
-INSERT INTO HospitalManagementDB.person (id, person_type,
-                                         first_name, last_name, email,
-                                         address, gender, day_of_birth)
-VALUES (1, 'doctor', 'John', 'Doe', 'johndoe@example.com', '123 Main St', 'MALE', '2023-03-24'),
+insert into person (id, person_type,
+                    first_name, last_name, email,
+                    address, gender, day_of_birth)
+values (1, 'doctor', 'John', 'Doe', 'johndoe@example.com', '123 Main St', 'MALE', '2023-03-24'),
        (2, 'doctor', 'Jane', 'Doe', 'janedoe@example.com', '456 Oak St', 'FEMALE', '2023-03-24'),
        (3, 'doctor', 'Bob', 'Smith', 'bobsmith@example.com', '789 Elm St', 'MALE', '2023-03-24'),
        (4, 'doctor', 'Alice', 'Johnson', 'alicejohnson@example.com', '1011 Pine St', 'FEMALE', '2023-03-24'),
@@ -95,8 +26,8 @@ VALUES (1, 'doctor', 'John', 'Doe', 'johndoe@example.com', '123 Main St', 'MALE'
        (19, 'doctor', 'Daniel', 'Roberts', 'danielroberts@example.com', '4041 Elm St', 'MALE', '2023-03-24'),
        (20, 'doctor', 'Madison', 'Turner', 'madisonturner@example.com', '4243 Pine St', 'FEMALE', '2023-03-24');
 
-INSERT INTO HospitalManagementDB.doctor (id, speciality)
-VALUES (1, 'PSYCHIATRY'),
+insert into doctor (id, speciality)
+values (1, 'PSYCHIATRY'),
        (2, 'CARDIOLOGY'),
        (3, 'DERMATOLOGY'),
        (4, 'ENDOCRINOLOGY'),
@@ -117,10 +48,10 @@ VALUES (1, 'PSYCHIATRY'),
        (19, 'PSYCHIATRY'),
        (20, 'CARDIOLOGY');
 
-INSERT INTO HospitalManagementDB.person (id, person_type,
-                                         first_name, last_name, email,
-                                         address, gender, day_of_birth)
-VALUES (21, 'patient', 'Emily', 'Johnson', 'emilyjohnson@example.com', '123 Main St', 'FEMALE', '2023-03-24'),
+insert into person (id, person_type,
+                    first_name, last_name, email,
+                    address, gender, day_of_birth)
+values (21, 'patient', 'Emily', 'Johnson', 'emilyjohnson@example.com', '123 Main St', 'FEMALE', '2023-03-24'),
        (22, 'patient', 'David', 'Smith', 'davidsmith@example.com', '456 Oak St', 'MALE', '2023-03-24'),
        (23, 'patient', 'Emma', 'Brown', 'emmabrown@example.com', '789 Elm St', 'FEMALE', '2023-03-24'),
        (24, 'patient', 'William', 'Davis', 'williamdavis@example.com', '1011 Pine St', 'MALE', '2023-03-24'),
@@ -175,62 +106,62 @@ VALUES (21, 'patient', 'Emily', 'Johnson', 'emilyjohnson@example.com', '123 Main
        (69, 'patient', 'William', 'Jones', 'williamjones@example.com', '321 Elm St', 'MALE', '2023-03-24'),
        (70, 'patient', 'Emily', 'Johnson', 'emilyjohnson@example.com', '123 Main St', 'FEMALE', '2023-03-24');
 
-INSERT INTO HospitalManagementDB.patient (id, family_email, family_phone_number)
-VALUES (21, 'familyemail0@email.com', 1234567890),
-       (22, 'familyemail0@email.com', 1234567890),
-       (23, 'familyemail0@email.com', 1234567890),
-       (24, 'familyemail0@email.com', 1234567890),
-       (25, 'familyemail0@email.com', 1234567890),
-       (26, 'familyemail0@email.com', 1234567890),
-       (27, 'familyemail0@email.com', 1234567890),
-       (28, 'familyemail0@email.com', 1234567890),
-       (29, 'familyemail0@email.com', 1234567890),
-       (30, 'familyemail0@email.com', 1234567890),
-       (31, 'familyemail0@email.com', 1234567890),
-       (32, 'familyemail0@email.com', 1234567890),
-       (33, 'familyemail0@email.com', 1234567890),
-       (34, 'familyemail0@email.com', 1234567890),
-       (35, 'familyemail0@email.com', 1234567890),
-       (36, 'familyemail0@email.com', 1234567890),
-       (37, 'familyemail0@email.com', 1234567890),
-       (38, 'familyemail0@email.com', 1234567890),
-       (39, 'familyemail0@email.com', 1234567890),
-       (40, 'familyemail0@email.com', 1234567890),
-       (41, 'familyemail0@email.com', 1234567890),
-       (42, 'familyemail0@email.com', 1234567890),
-       (43, 'familyemail0@email.com', 1234567890),
-       (44, 'familyemail0@email.com', 1234567890),
-       (45, 'familyemail0@email.com', 1234567890),
-       (46, 'familyemail0@email.com', 1234567890),
-       (47, 'familyemail0@email.com', 1234567890),
-       (48, 'familyemail0@email.com', 1234567890),
-       (49, 'familyemail0@email.com', 1234567890),
-       (50, 'familyemail0@email.com', 1234567890),
-       (51, 'familyemail0@email.com', 1234567890),
-       (52, 'familyemail0@email.com', 1234567890),
-       (53, 'familyemail0@email.com', 1234567890),
-       (54, 'familyemail0@email.com', 1234567890),
-       (55, 'familyemail0@email.com', 1234567890),
-       (56, 'familyemail0@email.com', 1234567890),
-       (57, 'familyemail0@email.com', 1234567890),
-       (58, 'familyemail0@email.com', 1234567890),
-       (59, 'familyemail0@email.com', 1234567890),
-       (60, 'familyemail0@email.com', 1234567890),
-       (61, 'familyemail0@email.com', 1234567890),
-       (62, 'familyemail0@email.com', 1234567890),
-       (63, 'familyemail0@email.com', 1234567890),
-       (64, 'familyemail0@email.com', 1234567890),
-       (65, 'familyemail0@email.com', 1234567890),
-       (66, 'familyemail0@email.com', 1234567890),
-       (67, 'familyemail0@email.com', 1234567890),
-       (68, 'familyemail0@email.com', 1234567890),
-       (69, 'familyemail0@email.com', 1234567890),
-       (70, 'familyemail0@email.com', 1234567890);
+insert into patient (id, family_email)
+values (21, 'familyemail0@email.com'),
+       (22, 'familyemail0@email.com'),
+       (23, 'familyemail0@email.com'),
+       (24, 'familyemail0@email.com'),
+       (25, 'familyemail0@email.com'),
+       (26, 'familyemail0@email.com'),
+       (27, 'familyemail0@email.com'),
+       (28, 'familyemail0@email.com'),
+       (29, 'familyemail0@email.com'),
+       (30, 'familyemail0@email.com'),
+       (31, 'familyemail0@email.com'),
+       (32, 'familyemail0@email.com'),
+       (33, 'familyemail0@email.com'),
+       (34, 'familyemail0@email.com'),
+       (35, 'familyemail0@email.com'),
+       (36, 'familyemail0@email.com'),
+       (37, 'familyemail0@email.com'),
+       (38, 'familyemail0@email.com'),
+       (39, 'familyemail0@email.com'),
+       (40, 'familyemail0@email.com'),
+       (41, 'familyemail0@email.com'),
+       (42, 'familyemail0@email.com'),
+       (43, 'familyemail0@email.com'),
+       (44, 'familyemail0@email.com'),
+       (45, 'familyemail0@email.com'),
+       (46, 'familyemail0@email.com'),
+       (47, 'familyemail0@email.com'),
+       (48, 'familyemail0@email.com'),
+       (49, 'familyemail0@email.com'),
+       (50, 'familyemail0@email.com'),
+       (51, 'familyemail0@email.com'),
+       (52, 'familyemail0@email.com'),
+       (53, 'familyemail0@email.com'),
+       (54, 'familyemail0@email.com'),
+       (55, 'familyemail0@email.com'),
+       (56, 'familyemail0@email.com'),
+       (57, 'familyemail0@email.com'),
+       (58, 'familyemail0@email.com'),
+       (59, 'familyemail0@email.com'),
+       (60, 'familyemail0@email.com'),
+       (61, 'familyemail0@email.com'),
+       (62, 'familyemail0@email.com'),
+       (63, 'familyemail0@email.com'),
+       (64, 'familyemail0@email.com'),
+       (65, 'familyemail0@email.com'),
+       (66, 'familyemail0@email.com'),
+       (67, 'familyemail0@email.com'),
+       (68, 'familyemail0@email.com'),
+       (69, 'familyemail0@email.com'),
+       (70, 'familyemail0@email.com');
 
-INSERT INTO HospitalManagementDB.medical_record (id, patient_id,
-                                                 blood_type, heart_rate, respiratory_rate, sugar_level,
-                                                 blood_pressure, weight, height, surgeries)
-VALUES (1, 21, 'A_POSITIVE', 80.0, 18.0, 100.0, 120.0, 70.0, 180.0, 0),
+insert into medical_record (id, patient_id,
+                            blood_type, heart_rate, respiratory_rate, sugar_level,
+                            blood_pressure, weight, height, surgeries)
+values (1, 21, 'A_POSITIVE', 80.0, 18.0, 100.0, 120.0, 70.0, 180.0, 0),
        (2, 22, 'A_NEGATIVE', 70.0, 16.0, 90.0, 110.0, 65.0, 170.0, 1),
        (3, 23, 'B_POSITIVE', 75.0, 20.0, 110.0, 130.0, 75.0, 185.0, 2),
        (4, 24, 'B_NEGATIVE', 65.0, 14.0, 95.0, 125.0, 60.0, 160.0, 0),
@@ -280,5 +211,3 @@ VALUES (1, 21, 'A_POSITIVE', 80.0, 18.0, 100.0, 120.0, 70.0, 180.0, 0),
        (48, 68, 'A_POSITIVE', 85.0, 22.0, 120.0, 140.0, 80.0, 190.0, 1),
        (49, 69, 'A_NEGATIVE', 90.0, 19.0, 120.0, 115.0, 75.0, 175.0, 2),
        (50, 70, 'B_POSITIVE', 80.0, 18.0, 100.0, 120.0, 70.0, 180.0, 0);
-
-commit;
