@@ -19,8 +19,7 @@
                             <h4 class="text-primary fw-bold">Medical Record Information</h4>
                         </div>
                         <div class="col-auto">
-                            <a th:href="@{/medicalRecord/downloadMedicalRecord}"
-                               class="btn btn-primary btn-sm float-end">
+                            <a class="btn btn-primary btn-sm float-end" id="download-btn">
                                 <i class="fa fa-download" aria-hidden="true">
                                     Download
                                 </i>
@@ -144,6 +143,23 @@
         <footer th:replace="~{common/common :: footer}"></footer>
     </div>
 </div>
+
+// add the jsPDF library
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+// download the medical record as a pdf file
+<script>
+    const downloadBtn = document.querySelector('#download-btn');
+    const cardBody = document.querySelector('.card-body');
+
+    downloadBtn.addEventListener('click', () => {
+        window.jsPDF = window.jspdf.jsPDF;
+        const pdf = new jsPDF();
+        pdf.text(cardBody.innerText, 10, 10);
+        pdf.save('medical-record.pdf');
+    });
+</script>
+
 <div th:replace="~{common/common :: body-bottom-scripts}"></div>
 </body>
 </html>
