@@ -4,6 +4,8 @@ import nidhal.hospitalmanagement.entity.MedicalRecord;
 import nidhal.hospitalmanagement.repository.MedicalRecordRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
 
@@ -36,7 +38,11 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     @Override
     public MedicalRecord getMedicalRecordById(long id) {
-        return null;
+        return medicalRecordRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> new NoSuchElementException("OOPS THERE IS NO MEDICAL RECORD ID LIKE THIS ONE: " + id)
+                );
     }
 
 

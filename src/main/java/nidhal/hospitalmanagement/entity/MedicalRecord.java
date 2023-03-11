@@ -1,8 +1,8 @@
 package nidhal.hospitalmanagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "medical_record")
 public class MedicalRecord {
@@ -40,5 +40,15 @@ public class MedicalRecord {
 
     private short surgeries;
 
+    public MedicalRecord() {
+        this.bloodType = null;
+        this.heartRate = 0;
+        this.respiratoryRate = 0;
+        this.sugarLevel = 0;
+        this.bloodPressure = 0;
+        this.weight = 0;
+        this.height = 0;
+        this.surgeries = 0;
+    }
 
 }

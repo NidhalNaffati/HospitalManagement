@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="~{common/common :: common-header}">
+    <title>Table</title>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav th:replace="~{common/common :: side-bar}"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="~{common/common :: top-bar}"></nav>
+
+            <div class="medical-record-card card shadow">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="text-primary fw-bold">Medical Record Information</h4>
+                        </div>
+                        <div class="col-auto">
+                            <a th:href="@{/medicalRecord/downloadMedicalRecord}"
+                               class="btn btn-primary btn-sm float-end">
+                                <i class="fa fa-download" aria-hidden="true">
+                                    Download
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+                        <strong>medical record ID:</strong>
+                        <span th:text="${medicalRecord.patient.id}"></span>
+                    </p>
+
+                    <p>
+                        <strong>patient ID:</strong>
+                        <span th:text="${medicalRecord.id}"></span>
+                    </p>
+
+                    <hr>
+
+                    <p><strong>first name:</strong>
+                        <span th:text="${medicalRecord.patient.firstName}"></span>
+                    </p>
+
+                    <p>
+                        <strong>last name:</strong>
+                        <span th:text="${medicalRecord.patient.lastName}"></span>
+                    </p>
+
+                    <p>
+                        <strong>birth date:</strong>
+                        <span th:text="${#dates.format(medicalRecord.patient.dayOfBirth, 'dd-MM-yyyy')}"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>gender:</strong>
+                        <span th:text="${medicalRecord.patient.gender}"></span>
+                    </p>
+
+                    <p>
+                        <strong>email:</strong>
+                        <span th:text="${medicalRecord.patient.email}"></span>
+                    </p>
+
+                    <p>
+                        <strong>family email:</strong>
+                        <span th:text="${medicalRecord.patient.familyEmail}"></span>
+                    </p>
+
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label" for="weight">weight</label>
+                            <input type="text" class="form-control" name="patientBirthdate" id="weight"
+                                   th:value="${medicalRecord.weight}" readonly>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label" for="height">height</label>
+                            <input class="form-control" name="patientBirthdate" id="height"
+                                   th:value="${medicalRecord.height}" readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label for="bloodType" class="form-label">blood type</label>
+                            <input type="text" class="form-control" id="bloodType"
+                                   th:value="${medicalRecord.bloodType}" readonly>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="bloodPressure" class="form-label">blood pressure</label>
+                            <input type="text" class="form-control" id="bloodPressure"
+                                   th:value="${medicalRecord.bloodPressure}" readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label" for="heartRate">heart rate</label>
+                            <input type="text" class="form-control" id="heartRate"
+                                   th:value="${medicalRecord.heartRate}" readonly>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label" for="respiratoryRate">respiration rate</label>
+                            <input type="text" class="form-control" id="respiratoryRate"
+                                   th:value="${medicalRecord.respiratoryRate}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label" for="sugarLevel">sugar level</label>
+                            <input type="text" class="form-control" id="sugarLevel"
+                                   th:value="${medicalRecord.sugarLevel}" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label" for="surgeries">number of surgeries</label>
+                            <input type="text" class="form-control" name="sugarLevel" id="surgeries"
+                                   th:value="${medicalRecord.surgeries}" readonly>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{common/common :: footer}"></footer>
+    </div>
+</div>
+<div th:replace="~{common/common :: body-bottom-scripts}"></div>
+</body>
+</html>
