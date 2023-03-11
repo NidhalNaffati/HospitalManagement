@@ -1,5 +1,6 @@
 package nidhal.hospitalmanagement.service;
 
+import nidhal.hospitalmanagement.entity.MedicalRecord;
 import nidhal.hospitalmanagement.entity.Patient;
 import nidhal.hospitalmanagement.repository.PatientRepository;
 import org.springframework.data.domain.Page;
@@ -11,13 +12,25 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 
-    public PatientServiceImpl(PatientRepository patientRepository) {
+    private final MedicalRecordServiceImpl medicalRecordService;
+
+    public PatientServiceImpl(PatientRepository patientRepository, MedicalRecordServiceImpl medicalRecordService) {
         this.patientRepository = patientRepository;
+        this.medicalRecordService = medicalRecordService;
     }
 
     @Override
     public Patient savePatient(Patient patient) {
-        return patientRepository.save(patient);
+
+        var savedPatient = patientRepository.save(patient);
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+
+        medicalRecord.setPatient(savedPatient);
+
+        medicalRecordService.saveMedicalRecord(medicalRecord);
+
+        return savedPatient;
     }
 
     @Override
@@ -27,6 +40,10 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void deletePatient(long id) {
+        // delete the associated medical record
+        medicalRecordService.deleteMedicalRecordByPatientId(id);
+
+        // delete the patient
         patientRepository.deleteById(id);
     }
 
