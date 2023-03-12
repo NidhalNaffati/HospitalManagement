@@ -22,11 +22,9 @@
                                 <h6 class="text-primary fw-bold m-0">Doctors Speciality</h6>
                             </div>
                             <div class="card-body">
-
                                 <div class="chart-area">
-                                    <div id="doctorSpecialityChart" th:attr="data-chartData=${chartData}"></div>
+                                    <canvas id="doctorSpecialityChart"></canvas>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -36,50 +34,55 @@
         </div>
         <footer th:replace="~{common/common :: footer}"></footer>
     </div>
-    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-
 
 <div th:replace="~{common/common :: body-bottom-scripts}"></div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="text/javascript" th:inline="javascript">
-    // Load the Visualization API and the corechart package
-    google.charts.load('current', {'packages': ['corechart']});
+    // Get the chart data passed from the controller
+    var chartData = [[${chartData}]];
 
+    // Extract the labels and data values from the chart data
+    var labels = chartData.map(function (item) {
+        return item[0];
+    });
+    var dataValues = chartData.map(function (item) {
+        return item[1];
+    });
 
-    // Set a callback function to run when the Visualization API is loaded
-    google.charts.setOnLoadCallback(drawChart);
+    // Define an array of colors
+    var colors = [
+        '#007bff', '#1cc88a', '#4e73df',
+        '#858796', '#6d71b1', "#388868",
+        '#36b9cc', '#6f42c1', '#9092a3'];
 
-    // Define the function to draw the chart
-    function drawChart() {
-        // Get the chart data passed from the controller
-        var chartData = [[${chartData}]];
-
-        // Create the data table
-        var data = new google.visualization.DataTable(chartData);
-
-        // Add columns
-        data.addColumn('string', 'Language');
-        data.addColumn('number', 'Number of Questions');
-
-        // Add rows
-        data.addRows([[${chartData}]]);
-
-
-        // Set chart options
-        var options = {
-            title: 'Number of Doctors by Speciality',
-            legend: {position: 'none'}
-        };
-
-        // Instantiate and draw the chart
-        var chart = new google.visualization.PieChart(document.getElementById('doctorSpecialityChart'));
-        chart.draw(data, options);
-    }
+    // Create a new chart instance using the canvas element
+    var ctx = document.getElementById('doctorSpecialityChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Doctors by Speciality',
+                data: dataValues,
+                backgroundColor: colors.slice(0, dataValues.length) // use the first n colors where n is the number of items in dataValues
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            title: {
+                display: true,
+                text: 'Number of Doctors by Speciality'
+            },
+            legend: {
+                display: true,
+                position: 'bottom'
+            }
+        }
+    });
 </script>
 </body>
-
 </html>
