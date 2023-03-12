@@ -16,4 +16,6 @@ public interface MedicalRecordService {
     MedicalRecord getMedicalRecordByPatientEmail(String patientEmail);
 
     MedicalRecord getMedicalRecordByPatientFirstNameOrLastName(String patientFirstNameOrLastName);
+
+    long getNumberOfMedicalRecords();
 }

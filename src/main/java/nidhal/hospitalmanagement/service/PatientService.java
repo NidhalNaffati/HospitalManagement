@@ -17,4 +17,6 @@ public interface PatientService {
     Patient getPatientByEmail(String email);
 
     Page<Patient> getAllPatients(Pageable pageable);
+
+    long getNumberOfPatients();
 }

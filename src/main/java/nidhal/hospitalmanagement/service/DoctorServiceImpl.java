@@ -89,6 +89,11 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
+    @Override
+    public long getNumberOfDoctors() {
+        return doctorRepository.countDoctors();
+    }
+
 
     // I create a List<List<Object>> because this is the format that the addRows() JavaScript method of the Google Charts library expects.
     public static List<List<Object>> convertMapToAList(Map<DoctorSpeciality, Integer> numberOfDoctorsForEachSpeciality) {

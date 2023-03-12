@@ -33,4 +33,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query("SELECT COUNT(d) FROM Doctor d WHERE d.speciality = ?1")
     int countBySpeciality(DoctorSpeciality specialization);
+
+    // create the method that count all doctors
+    @Query("SELECT COUNT(d) FROM Doctor d")
+    long countDoctors();
 }

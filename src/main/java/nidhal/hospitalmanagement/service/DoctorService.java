@@ -33,4 +33,6 @@ public interface DoctorService {
 
     Map<DoctorSpeciality, Integer> getNumberOfDoctorsForEachSpeciality();
 
+    long getNumberOfDoctors();
+
 }

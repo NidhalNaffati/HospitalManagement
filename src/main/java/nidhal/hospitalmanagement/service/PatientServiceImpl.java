@@ -61,4 +61,9 @@ public class PatientServiceImpl implements PatientService {
     public Page<Patient> getAllPatients(Pageable pageable) {
         return patientRepository.findAll(pageable);
     }
+
+    @Override
+    public long getNumberOfPatients() {
+        return patientRepository.countPatients();
+    }
 }

@@ -14,4 +14,7 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Lo
     @Transactional
     @Query("DELETE FROM MedicalRecord m WHERE m.patient.id = ?1")
     void deleteByPatientId(long patientId);
+
+    @Query("SELECT COUNT(m) FROM MedicalRecord m")
+    long countMedicalRecords();
 }

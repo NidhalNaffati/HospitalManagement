@@ -55,4 +55,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public MedicalRecord getMedicalRecordByPatientFirstNameOrLastName(String patientFirstNameOrLastName) {
         return null;
     }
+
+    @Override
+    public long getNumberOfMedicalRecords() {
+        return medicalRecordRepository.countMedicalRecords();
+    }
 }
