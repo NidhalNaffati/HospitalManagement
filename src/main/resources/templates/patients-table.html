@@ -53,11 +53,7 @@
                                 <tbody>
 
                                 <tr th:each="patient: ${patientList}">
-                                    <td>
-                                        <img class="rounded-circle me-2" width="30" height="30"
-                                             src="/img/avatars/avatar1.jpeg" alt="avatar-img"/>
-                                        <a th:text="${patient.firstName}"/>
-                                    </td>
+                                    <td th:text="${patient.firstName}"/>
                                     <td th:text="${patient.lastName}"/>
                                     <td th:text="${patient.gender}"/>
                                     <td th:text="${patient.address}"/>
@@ -129,7 +125,6 @@
 
         <footer th:replace="~{common/common :: footer}"></footer>
     </div>
-    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
 <div th:replace="~{common/common :: body-bottom-scripts}"></div>
 </body>
