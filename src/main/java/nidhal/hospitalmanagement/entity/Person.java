@@ -44,5 +44,12 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "last_update_at", nullable = false, updatable = true)
+    private Date updatedAt;
 
 }

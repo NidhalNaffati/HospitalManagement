@@ -27,18 +27,19 @@ create table patient
     primary key (id)
 );
 
-create table person
-(
-    person_type  varchar(31) not null,
-    id           bigint      not null,
-    address      varchar(255),
-    day_of_birth datetime(6),
-    email        varchar(255),
-    first_name   varchar(255),
-    gender       varchar(255),
-    last_name    varchar(255),
-    primary key (id)
-);
+create table person (
+       person_type varchar(31) not null,
+        id bigint not null,
+        address varchar(255),
+        created_at datetime(6) not null,
+        day_of_birth datetime(6),
+        email varchar(255),
+        first_name varchar(255),
+        gender varchar(255),
+        last_name varchar(255),
+        last_update_at datetime(6),
+        primary key (id)
+    );
 
 create table person_seq
 (
