@@ -3,7 +3,18 @@
 
 <head th:replace="~{common/common :: common-header}">
     <title>Dashboard</title>
+
+
 </head>
+
+<style>
+    .chart-area-patients {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+
 
 <body id="page-top">
 <div id="wrapper">
@@ -74,6 +85,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-lg-7 col-xl-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="text-primary fw-bold m-0">Number Of Patients for Each Month</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area-patients">
+                                    <canvas id="patients-chart" th:attr="data-chart-data=${linearChartData}"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-lg-5 col-xl-4">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -96,7 +120,46 @@
 
 <div th:replace="~{common/common :: body-bottom-scripts}"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    /* Retrieve the number of patients for each month from the model */
+    var numberOfPatientsForEachMonth = [[${linearChartData}]];
+
+    /* Extract the number of patients and labels from the map */
+    var numberOfPatients = Object.values(numberOfPatientsForEachMonth);
+    var labels = Object.keys(numberOfPatientsForEachMonth).map(function (month) {
+        return new Date(2023, month - 1, 1).toLocaleString('default', {month: 'long'});
+    });
+
+    /* Create the chart */
+    var ctx = document.getElementById('patients-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Patients',
+                fill: true,
+                data: numberOfPatients,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: '#e74a3b',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
 <script type="text/javascript" th:inline="javascript">
     // Get the chart data passed from the controller

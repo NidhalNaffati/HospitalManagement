@@ -30,7 +30,10 @@ public class HomePageController {
     @GetMapping("/")
     public String setDoctorsSpecialityChart(Model model) {
 
-        //set up the chart
+        // set up the linear chart of the number of patients for each month
+        model.addAttribute("linearChartData", getNumberOfPatientsForEachMonth());
+
+        //set up the chart of the number of doctors for each speciality
         model.addAttribute("chartData", convertMapToAList(getNumberOfDoctorsForEachSpeciality()));
 
         //set up the number of doctors
@@ -67,6 +70,10 @@ public class HomePageController {
                 System.out.println("Key: " + key + ", Value: " + value));
 
         return numberOfDoctorsForEachSpeciality;
+    }
+
+    private Map<Short, Long> getNumberOfPatientsForEachMonth() {
+        return patientService.getNumberOfPatientsForEachMonth();
     }
 
     @GetMapping("/test")
