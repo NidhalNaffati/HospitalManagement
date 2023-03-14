@@ -30,16 +30,25 @@
 
                 <div class="card-body">
 
-                    <p>
-                        <strong>medical record ID:</strong>
-                        <span th:text="${medicalRecord.patient.id}"></span>
-                    </p>
+                    <div class="text-end"> <!-- add text-end class here -->
 
-                    <p>
-                        <strong>patient ID:</strong>
-                        <span th:text="${medicalRecord.id}"></span>
-                    </p>
+                        <p>
+                            <strong>medical record ID:</strong>
+                            <span th:text="${medicalRecord.patient.id}"></span>
+                        </p>
 
+                        <p>
+                            <strong>patient ID:</strong>
+                            <span th:text="${medicalRecord.id}"></span>
+                        </p>
+
+                        <p>
+                            <strong>created at :</strong>
+                            <span th:text="${#dates.format(medicalRecord.patient.createdAt, 'dd-MM-yyyy')}"></span>
+                        </p>
+
+
+                    </div>
                     <hr>
 
                     <p><strong>first name:</strong>
@@ -76,64 +85,54 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label" for="weight">weight</label>
-                            <input type="text" class="form-control" name="patientBirthdate" id="weight"
-                                   th:value="${medicalRecord.weight}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Weight:</strong>
+                            <span th:text="${medicalRecord.weight}"></span>
                         </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label" for="height">height</label>
-                            <input class="form-control" name="patientBirthdate" id="height"
-                                   th:value="${medicalRecord.height}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Height:</strong>
+                            <span th:text="${medicalRecord.height}"></span>
                         </div>
                     </div>
 
 
                     <div class="row">
-                        <div class="col-md-2 mb-3">
-                            <label for="bloodType" class="form-label">blood type</label>
-                            <input type="text" class="form-control" id="bloodType"
-                                   th:value="${medicalRecord.bloodType}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Blood Type:</strong>
+                            <span th:text="${medicalRecord.bloodType}"></span>
                         </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label for="bloodPressure" class="form-label">blood pressure</label>
-                            <input type="text" class="form-control" id="bloodPressure"
-                                   th:value="${medicalRecord.bloodPressure}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Blood Pressure: </strong>
+                            <span th:text="${medicalRecord.bloodPressure}"></span>
                         </div>
                     </div>
 
 
                     <div class="row">
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label" for="heartRate">heart rate</label>
-                            <input type="text" class="form-control" id="heartRate"
-                                   th:value="${medicalRecord.heartRate}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Heart Rate: </strong>
+                            <span th:text="${medicalRecord.heartRate}"></span>
                         </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label" for="respiratoryRate">respiration rate</label>
-                            <input type="text" class="form-control" id="respiratoryRate"
-                                   th:value="${medicalRecord.respiratoryRate}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Respiration Rate: </strong>
+                            <span th:text="${medicalRecord.respiratoryRate}"></span>
                         </div>
                     </div>
 
                     <div class="row">
-
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label" for="sugarLevel">sugar level</label>
-                            <input type="text" class="form-control" id="sugarLevel"
-                                   th:value="${medicalRecord.sugarLevel}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Sugar Level: </strong>
+                            <span th:text="${medicalRecord.sugarLevel}"></span>
                         </div>
-
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2 mb-3">
-                            <label class="form-label" for="surgeries">number of surgeries</label>
-                            <input type="text" class="form-control" name="sugarLevel" id="surgeries"
-                                   th:value="${medicalRecord.surgeries}" readonly>
+                        <div class="col-md-4 mb-3">
+                            <strong>Number of Surgeries </strong>
+                            <span th:text="${medicalRecord.surgeries}"></span>
                         </div>
                     </div>
 
@@ -144,10 +143,8 @@
     </div>
 </div>
 
-// add the jsPDF library
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-// download the medical record as a pdf file
 <script>
     const downloadBtn = document.querySelector('#download-btn');
     const cardBody = document.querySelector('.card-body');
