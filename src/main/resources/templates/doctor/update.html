@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="~{common/common :: common-header}">
+    <title>doctor update</title>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav th:replace="~{common/common :: side-bar}"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="~{common/common :: top-bar}"></nav>
+            <div class="container-fluid">
+                <h3 class="text-center text-primary mb-4">Patient Information</h3>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form th:action="@{/doctor/update}" th:object="${doctor}" th:method="post">
+                            <div th:replace="~{doctor/common-form :: form}"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{common/common :: footer}"></footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<div th:replace="~{common/common :: body-bottom-scripts}"></div>
+</body>
+</html>

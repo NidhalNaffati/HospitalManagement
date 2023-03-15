@@ -2,7 +2,7 @@
 <html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head th:replace="~{common/common :: common-header}">
-    <title>Table</title>
+    <title>doctors</title>
 </head>
 
 <body id="page-top">
@@ -18,9 +18,7 @@
                         <p class="text-primary m-0 fw-bold">Doctors Info</p>
                     </div>
                     <div class="card-body">
-
                         <div class="row">
-
                             <div class="col-md-auto">
                                 <div class="text-md-end dataTables_filter" id="dataTable_filter">
                                     <label class="form-label">
@@ -89,18 +87,25 @@
                             <div class="col-md-6 ">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" aria-label="Previous"
-                                                                 th:href="${speciality != null ? '/doctors/' + speciality + '?page=1' : '/doctors?page=1'}"><span
-                                                aria-hidden="true">First</span></a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Previous"
+                                               th:href="${speciality != null ? '/doctors/' + speciality + '?page=1' : '/doctors?page=1'}">
+                                                <span aria-hidden="true">First</span>
+                                            </a>
+                                        </li>
                                         <li class="page-item {{currentPage == i ? 'active' : ''}}"
                                             th:each="p : ${#numbers.sequence(1, totalPages)}">
                                             <a class="page-link"
                                                th:href="${speciality != null ? '/doctors/' + speciality + '?page=' + p : '/doctors?page=' + p}"
-                                               th:text="${p}"></a>
+                                               th:text="${p}">
+                                            </a>
                                         </li>
-                                        <li class="page-item"><a class="page-link" aria-label="Next"
-                                                                 th:href="${speciality != null ? '/doctors/' + speciality + '?page=' + totalPages : '/doctors?page=' + totalPages}"><span
-                                                aria-hidden="true">Last</span></a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Next"
+                                               th:href="${speciality != null ? '/doctors/' + speciality + '?page=' + totalPages : '/doctors?page=' + totalPages}">
+                                                <span aria-hidden="true">Last</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>

@@ -8,12 +8,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 
 @Controller
+@RequestMapping("/doctor")
 public class DoctorController {
     private final DoctorServiceImpl doctorService;
 
@@ -23,7 +29,7 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping("/doctors")
+    @GetMapping("/list")
     public String getDoctors(Model model, @RequestParam(defaultValue = "1") int page) {
 
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
@@ -33,11 +39,10 @@ public class DoctorController {
         return passTheDoctorsInfoToTheFrontEnd(model, page, doctorPage);
     }
 
-    @GetMapping("/doctors/{speciality}")
+    @GetMapping("/list/{speciality}")
     public String getDoctorsBySpeciality(
             Model model, @PathVariable DoctorSpeciality speciality,
             @RequestParam(defaultValue = "1") int page) {
-
 
 
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
@@ -62,22 +67,41 @@ public class DoctorController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
 
-        return "doctors-table";
+        return "doctor/table";
     }
 
-    @GetMapping("/doctor/edit/{id}")
-    public String getDoctorById(@PathVariable long id, Model model) {
-        Doctor doctor = doctorService.getDoctorById(id);
+    @GetMapping("/add")
+    private String addDoctor(Model model) {
+        Doctor doctor = new Doctor();
         model.addAttribute("doctor", doctor);
-        // TODO: not completed
-        return "redirect:/doctors";
+        return "doctor/create";
     }
 
-    @GetMapping("/doctor/delete/{id}")
+    @PostMapping("/save")
+    public String saveDoctor(@ModelAttribute("doctor") Doctor doctor) {
+
+        doctorService.saveDoctor(doctor);
+
+        return "redirect:/doctor/list";
+    }
+
+    @PostMapping("/update")
+    public String updateDoctor(@ModelAttribute("doctor") Doctor doctor) {
+        doctorService.updateDoctor(doctor);
+        return "redirect:/doctor/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String getDoctorById(@PathVariable long id, Model model) {
+        Doctor existingDoctor = doctorService.getDoctorById(id);
+        model.addAttribute("doctor", existingDoctor);
+        return "doctor/update";
+    }
+
+    @GetMapping("/delete/{id}")
     public String deleteDoctor(@PathVariable Long id) {
         doctorService.deleteDoctor(id);
-        return "redirect:/doctors";
+        return "redirect:/doctor/list";
     }
-
 
 }

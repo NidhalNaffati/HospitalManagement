@@ -20,6 +20,11 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor saveDoctor(Doctor doctor) {
+        // create the local date time
+        Date currentDate = new Date();
+
+        doctor.setCreatedAt(currentDate);
+
         return doctorRepository.save(doctor);
     }
 
