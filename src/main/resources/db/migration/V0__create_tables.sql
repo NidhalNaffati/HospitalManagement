@@ -41,7 +41,12 @@ create table person (
         primary key (id)
     );
 
-create table person_seq
+create table person_sequence
+(
+    next_val bigint
+);
+
+  create table medical_record_sequence
 (
     next_val bigint
 );

@@ -1,5 +1,9 @@
-insert into person_seq
-values (1001);
+insert into person_sequence
+values (71);
+
+insert into medical_record_sequence
+values (71);
+
 
 INSERT INTO person (id, person_type, first_name, last_name, email, address, gender,
                     day_of_birth, created_at, last_update_at)
@@ -44,8 +48,8 @@ values (1, 'doctor', 'John', 'Doe', 'johndoe@example.com', '123 Main St', 'MALE'
        (20, 'doctor', 'Madison', 'Turner', 'madisonturner@example.com', '4243 Pine St', 'FEMALE',
         '2023-03-24', '2023-4-24', '2023-4-25');
 
-insert into doctor (id, speciality)
-values (1, 'PSYCHIATRY'),
+INSERT INTO doctor (id, speciality)
+VALUES (1, 'PSYCHIATRY'),
        (2, 'CARDIOLOGY'),
        (3, 'DERMATOLOGY'),
        (4, 'ENDOCRINOLOGY'),

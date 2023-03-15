@@ -16,7 +16,14 @@ import lombok.ToString;
 public class MedicalRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medical_record_sequence")
+    @SequenceGenerator(
+            name = "medical_record_sequence",
+            sequenceName = "medical_record_sequence",
+            initialValue = 71,
+            allocationSize = 1
+    )
+    @Column(name = "id", updatable = true, nullable = false)
     private long id;
 
     @OneToOne

@@ -22,7 +22,13 @@ import java.util.Date;
 @DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_sequence")
+    @SequenceGenerator(
+            name = "person_sequence",
+            sequenceName = "person_sequence",
+            initialValue = 71,
+            allocationSize = 1
+    )
     @Column(nullable = false)
     private Long id;
 
