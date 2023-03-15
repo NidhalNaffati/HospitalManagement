@@ -20,9 +20,7 @@
                         <p class="text-primary m-0 fw-bold">Doctors Info</p>
                     </div>
                     <div class="card-body">
-
                         <div class="row">
-
                             <div class="col-md-auto">
                                 <div class="text-md-end dataTables_filter" id="dataTable_filter">
                                     <label class="form-label">
@@ -63,8 +61,12 @@
 
                                     <!--  delete or update patient-->
                                     <td>
-                                        <a th:href="${'/patient/edit/' + patient.id}" th:title="edit">
+                                        <a th:href="${'/patient/update/' + patient.id}" th:title="edit">
                                             <i class="fas fa-edit" alt="edit"></i>
+                                        </a>
+
+                                        <a th:href="${'/medicalRecord/' + patient.id}">
+                                            <i class="fas fa-file-medical" alt="medical record"></i>
                                         </a>
 
                                         <a th:href="${'/patient/delete/' + patient.id}" th:title="delete"
@@ -93,10 +95,8 @@
                                 <p>Total Patients [[${totalPatients}]] &nbsp; </p>
                             </div>
 
-
                             <div class="col-md-6 ">
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-
                                     <ul class="pagination">
                                         <li class="page-item ">
                                             <a class="page-link" aria-label="Previous"

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<!--this for is used in both the update & create patient-->
+<div th:fragment="form">
+    <div class="row">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="col">
+            <div class="mb-3">
+                <label class="form-label">
+                    <strong>First Name</strong>
+                </label>
+                <input class="form-control" type="text" id="first_name" th:field="*{firstName}"
+                       placeholder="John">
+            </div>
+        </div>
+        <div class="col">
+            <div class="mb-3">
+                <label class="form-label" for="last_name">
+                    <strong>Last Name</strong>
+                </label>
+
+                <input class="form-control" type="text" id="last_name" th:field="*{lastName}"
+                       placeholder="Doe">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <label class="form-label" for="email">
+                    <strong>Email Address</strong>
+                </label>
+                <input class="form-control" type="email" id="email" th:field="*{email}"
+                       placeholder="patient@example.com">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <label class="form-label" for="email">
+                    <strong>Family Email Address</strong>
+                </label>
+                <input class="form-control" type="text" id="username" th:field="*{familyEmail}"
+                       placeholder="user.name">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <label class="form-label" for="male">
+                    <strong>Gender</strong>
+                </label>
+                <div>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" id="male" name="gender" th:value="MALE" checked>MALE
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" id="female" name="gender" th:value="FEMALE">FEMALE
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="mb-3">
+                <label class="form-label" for="dateOfBirth">
+                    <strong>Date of Birth</strong>
+                </label>
+                <input class="form-control" th:type="date"
+                       id="dateOfBirth"
+                       th:field="*{dayOfBirth}">
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="address">
+            <strong>Address</strong>
+        </label>
+        <input class="form-control" type="text" id="address" th:field="*{address}"
+               placeholder="Tunisia-Street">
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-info btn-sm" type="submit">Save Changes</button>
+    </div>
+
+    </form>
+</div>
+</html>

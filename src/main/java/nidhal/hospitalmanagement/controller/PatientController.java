@@ -29,14 +29,6 @@ public class PatientController {
 
         Page<Patient> patientPage = patientService.getAllPatients(pageable);
 
-        passPatientsInfoToTheFrontEnd(model, page, patientPage);
-
-        return "patients-table";
-
-    }
-
-    private void passPatientsInfoToTheFrontEnd(Model model, int page, Page<Patient> patientPage) {
-
         List<Patient> patientList = patientPage.getContent();
 
         int totalPages = patientPage.getTotalPages();
@@ -48,18 +40,27 @@ public class PatientController {
         model.addAttribute("currentPage", page);
         model.addAttribute("patientList", patientList);
 
+        return "patient/table";
     }
 
-    @GetMapping("/patient")
+    @GetMapping("/add-patient")
     public String add(Model model) {
         model.addAttribute("patient", new Patient());
-        return "patient-form";
+        return "patient/create";
     }
 
     @PostMapping(value = "patient/save")
     public String save(@ModelAttribute("patient") Patient patient) {
 
         patientService.savePatient(patient);
+
+        return "redirect:/patients";
+    }
+
+    @PostMapping(value = "/patient/update")
+    public String updatePatient(@ModelAttribute("patient") Patient patient) {
+
+        patientService.updatePatient(patient);
 
         return "redirect:/patients";
     }
@@ -71,12 +72,14 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @GetMapping("/patient/edit/{id}")
-    public String getDoctorById(@PathVariable long id, Model model) {
+    @GetMapping("/patient/update/{id}")
+    public String updatePatient(@PathVariable long id, Model model) {
 
-        // TODO: not completed.
+        // Retrieve the patient object by ID
+        Patient existingPatient = patientService.getPatientById(id);
 
-        return "redirect:/patients";
+        model.addAttribute("patient", existingPatient);
+
+        return "patient/update";
     }
-
 }

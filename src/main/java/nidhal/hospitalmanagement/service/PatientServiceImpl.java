@@ -47,7 +47,32 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient updatePatient(Patient patient) {
-        return null;
+
+        // Get the patient object from the database
+        Patient existingPatient = patientRepository
+                .findById(patient.getId())
+                .orElse(null);
+
+        if (existingPatient == null) return null;
+
+        else {
+            // create the local date time
+            Date currentDate = new Date();
+
+            // Update the properties of the patient object with the data from the form submission
+            existingPatient.setFirstName(patient.getFirstName());
+            existingPatient.setLastName(patient.getLastName());
+            existingPatient.setGender(patient.getGender());
+            existingPatient.setAddress(patient.getAddress());
+            existingPatient.setDayOfBirth(patient.getDayOfBirth());
+            existingPatient.setEmail(patient.getEmail());
+            existingPatient.setFamilyEmail(patient.getFamilyEmail());
+            existingPatient.setUpdatedAt(currentDate);
+        }
+
+
+        // Save the updated patient object to the database
+        return patientRepository.save(existingPatient);
     }
 
     @Override
@@ -61,7 +86,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient getPatientById(Long id) {
-        return null;
+        return patientRepository
+                .findById(id)
+                .orElse(null);
     }
 
     @Override
