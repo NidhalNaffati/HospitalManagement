@@ -30,8 +30,33 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor updateDoctor(Doctor doctor) {
-        // TODO: not completed
-        return doctorRepository.save(doctor);
+
+        // Get the doctor object from the database
+        Doctor existingDoctor = doctorRepository
+                .findById(doctor.getId())
+                .orElse(null);
+
+        if (existingDoctor == null) return null;
+
+        else {
+            // Update the properties of the doctor object with the data from the form submission
+            existingDoctor.setFirstName(doctor.getFirstName());
+            existingDoctor.setLastName(doctor.getLastName());
+            existingDoctor.setGender(doctor.getGender());
+            existingDoctor.setAddress(doctor.getAddress());
+            existingDoctor.setDayOfBirth(doctor.getDayOfBirth());
+            existingDoctor.setEmail(doctor.getEmail());
+            existingDoctor.setSpeciality(doctor.getSpeciality());
+
+            // create the local date time
+            Date currentDate = new Date();
+            // update the updated at property
+            existingDoctor.setUpdatedAt(currentDate);
+        }
+
+        // Save the updated patient object to the database
+        return doctorRepository.save(existingDoctor);
+
     }
 
     @Override
