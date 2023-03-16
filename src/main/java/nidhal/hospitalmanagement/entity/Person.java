@@ -2,6 +2,8 @@ package nidhal.hospitalmanagement.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +35,13 @@ public class Person {
     private Long id;
 
     @NotBlank(message = "First name is required")
+    @Min(value = 3, message = "First name must be at least 3 characters")
+    @Max(value = 20, message = "First name must be at most 20 characters")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
+    @Min(value = 3, message = "Last name must be at least 3 characters")
+    @Max(value = 20, message = "Last name must be at most 20 characters")
     private String lastName;
 
     @Email(message = "Email must be a valid email address")

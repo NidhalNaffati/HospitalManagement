@@ -1,5 +1,6 @@
 package nidhal.hospitalmanagement.controller;
 
+import jakarta.validation.Valid;
 import nidhal.hospitalmanagement.entity.Patient;
 import nidhal.hospitalmanagement.service.PatientServiceImpl;
 import org.springframework.data.domain.Page;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,7 +52,12 @@ public class PatientController {
     }
 
     @PostMapping(value = "patient/save")
-    public String save(@ModelAttribute("patient") Patient patient) {
+    public String save(@Valid @ModelAttribute("patient") Patient patient, BindingResult result) {
+
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+            return "patient/create";
+        }
 
         patientService.savePatient(patient);
 
