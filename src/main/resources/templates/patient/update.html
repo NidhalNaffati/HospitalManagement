@@ -17,7 +17,7 @@
                 <div class="card shadow">
                     <div class="card-body">
 
-                        <form th:action="@{/patient/update}" th:object="${patient}" method="post">
+                        <form th:action="@{/patients/update}" th:object="${patient}" method="post">
                             <!-- Form content here -->
                             <div th:replace="~{patient/common-form :: form}"></div>
                         </form>

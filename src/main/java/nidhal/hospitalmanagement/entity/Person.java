@@ -2,9 +2,8 @@ package nidhal.hospitalmanagement.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -28,6 +27,8 @@ public class Person {
     @SequenceGenerator(
             name = "person_sequence",
             sequenceName = "person_sequence",
+            // we have created some data in the database,
+            // 70 is the last id --> so we start from 71
             initialValue = 71,
             allocationSize = 1
     )
@@ -35,13 +36,11 @@ public class Person {
     private Long id;
 
     @NotBlank(message = "First name is required")
-    @Min(value = 3, message = "First name must be at least 3 characters")
-    @Max(value = 20, message = "First name must be at most 20 characters")
+    @Size(min = 3, max = 20, message = "First name must be between 3 and 20 characters")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
-    @Min(value = 3, message = "Last name must be at least 3 characters")
-    @Max(value = 20, message = "Last name must be at most 20 characters")
+    @Size(min = 3, max = 20, message = "Last name must be between 3 and 20 characters")
     private String lastName;
 
     @Email(message = "Email must be a valid email address")
@@ -61,7 +60,7 @@ public class Person {
     private Date createdAt;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "last_update_at", nullable = false, updatable = true)
+    @Column(name = "last_update_at", nullable = false)
     private Date updatedAt;
 
 }

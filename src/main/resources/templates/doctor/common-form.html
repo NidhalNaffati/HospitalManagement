@@ -11,8 +11,11 @@
                 <label class="form-label">
                     <strong>First Name</strong>
                 </label>
-                <input class="form-control" type="text" id="first_name" th:field="*{firstName}"
-                       placeholder="John">
+                <input class="form-control" type="text" id="first_name"
+                       th:field="*{firstName}"
+                       placeholder="John" required>
+                <span class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+                      th:errors="*{firstName}"></span>
             </div>
         </div>
         <div class="col">
@@ -22,7 +25,9 @@
                 </label>
 
                 <input class="form-control" type="text" id="last_name" th:field="*{lastName}"
-                       placeholder="Doe">
+                       placeholder="Doe" required>
+                <span class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                      th:text="${#strings.listJoin(#fields.errors('lastName'), ', ')}"></span>
             </div>
         </div>
     </div>

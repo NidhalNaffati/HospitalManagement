@@ -12,10 +12,10 @@
         <div id="content">
             <nav th:replace="~{common/common :: top-bar}"></nav>
             <div class="container-fluid">
-                <h3 class="text-center text-primary mb-4">Patient Information</h3>
+                <h3 class="text-center text-primary mb-4">Doctor Information</h3>
                 <div class="card shadow">
                     <div class="card-body">
-                        <form th:action="@{/doctor/save}" th:object="${doctor}" method="post">
+                        <form th:action="@{/doctors/save}" th:object="${doctor}" method="post">
                             <div th:replace="~{doctor/common-form :: form}"></div>
                         </form>
                     </div>

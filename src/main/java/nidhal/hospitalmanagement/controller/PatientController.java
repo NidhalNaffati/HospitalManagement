@@ -15,6 +15,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/patients")
 public class PatientController {
     private final PatientServiceImpl patientService;
 
@@ -24,7 +25,53 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/patients")
+    @GetMapping("create")
+    public String renderPatientFormPage(Model model) {
+        Patient patient = new Patient();
+        model.addAttribute("patient", patient);
+        return "patient/create";
+    }
+
+    @PostMapping("save")
+    public String savePatient(@Valid @ModelAttribute("patient") Patient patient, BindingResult result) {
+        // Check if there are any errors
+        if (result.hasErrors()) {
+            // If there are errors, return the form page
+            return "patient/create";
+        }
+        // If there are no errors, save the patient
+        patientService.savePatient(patient);
+
+        return "redirect:/patients";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteDoctor(@PathVariable Long id) {
+        patientService.deletePatient(id);
+        return "redirect:/patients";
+    }
+
+    @GetMapping("update/{id}")
+    public String renderTheUpdateForm(@PathVariable long id, Model model) {
+        // Retrieve the patient object by ID
+        Patient existingPatient = patientService.getPatientById(id);
+        model.addAttribute("patient", existingPatient);
+        return "patient/update";
+    }
+
+    @PostMapping("update")
+    public String updatePatient(@Valid @ModelAttribute("patient") Patient patient, BindingResult result) {
+        // Check if there are any errors
+        if (result.hasErrors()) {
+            // If there are errors, return the form page
+            return "patient/update";
+        }
+        // If there are no errors, save the patient
+        patientService.updatePatient(patient);
+        return "redirect:/patients";
+    }
+
+    @GetMapping()
     public String getPatients(Model model, @RequestParam(defaultValue = "1") int page) {
 
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
@@ -43,50 +90,5 @@ public class PatientController {
         model.addAttribute("patientList", patientList);
 
         return "patient/table";
-    }
-
-    @GetMapping("/add-patient")
-    public String add(Model model) {
-        model.addAttribute("patient", new Patient());
-        return "patient/create";
-    }
-
-    @PostMapping(value = "patient/save")
-    public String save(@Valid @ModelAttribute("patient") Patient patient, BindingResult result) {
-
-        if (result.hasErrors()) {
-            System.out.println(result.getAllErrors());
-            return "patient/create";
-        }
-
-        patientService.savePatient(patient);
-
-        return "redirect:/patients";
-    }
-
-    @PostMapping(value = "/patient/update")
-    public String updatePatient(@ModelAttribute("patient") Patient patient) {
-
-        patientService.updatePatient(patient);
-
-        return "redirect:/patients";
-    }
-
-
-    @GetMapping("/patient/delete/{id}")
-    public String deleteDoctor(@PathVariable Long id) {
-        patientService.deletePatient(id);
-        return "redirect:/patients";
-    }
-
-    @GetMapping("/patient/update/{id}")
-    public String updatePatient(@PathVariable long id, Model model) {
-
-        // Retrieve the patient object by ID
-        Patient existingPatient = patientService.getPatientById(id);
-
-        model.addAttribute("patient", existingPatient);
-
-        return "patient/update";
     }
 }

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-
 <head th:replace="~{common/common :: common-header}">
-    <title>Page Not Found - Brand</title>
+    <title>patients</title>
 </head>
 
-<body id="page-top">
+<body>
 <div id="wrapper">
     <nav th:replace="~{common/common :: side-bar}"></nav>
     <div class="d-flex flex-column" id="content-wrapper">
@@ -14,25 +13,9 @@
             <nav th:replace="~{common/common :: top-bar}"></nav>
 
             <div class="container-fluid">
-                <h3 class="text-center text-dark mb-4">Team</h3>
+                <h3 class="text-center text-dark mb-4">patients information</h3>
                 <div class="card shadow">
-                    <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">Doctors Info</p>
-                    </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-auto">
-                                <div class="text-md-end dataTables_filter" id="dataTable_filter">
-                                    <label class="form-label">
-                                        <input type="search" class="form-control form-control-sm"
-                                               aria-controls="dataTable"
-                                               placeholder="Search">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-
                         <div class="table-responsive table mt-2" role="grid"
                              aria-describedby="dataTable_info">
                             <table class="table my-0" id="dataTable">
@@ -61,15 +44,15 @@
 
                                     <!--  delete or update patient-->
                                     <td>
-                                        <a th:href="${'/patient/update/' + patient.id}" th:title="edit">
+                                        <a th:href="${'/patients/update/' + patient.id}" th:title="edit">
                                             <i class="fas fa-edit" alt="edit"></i>
                                         </a>
 
-                                        <a th:href="${'/medicalRecord/' + patient.id}">
+                                        <a th:href="${'/medicalRecords/' + patient.id}">
                                             <i class="fas fa-file-medical" alt="medical record"></i>
                                         </a>
 
-                                        <a th:href="${'/patient/delete/' + patient.id}" th:title="delete"
+                                        <a th:href="${'/patients/delete/' + patient.id}" th:title="delete"
                                            onclick="return confirm('Are you sure!! You want to delete this patient')">
                                             <i class="fas fa-trash" alt="delete"></i>
                                         </a>
