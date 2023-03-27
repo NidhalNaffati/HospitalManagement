@@ -27,6 +27,11 @@ public class HomePageController {
         this.medicalRecordService = medicalRecordService;
     }
 
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
+
     @GetMapping("/")
     public String setDoctorsSpecialityChart(Model model) {
 

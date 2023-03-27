@@ -4,11 +4,11 @@ import nidhal.hospitalmanagement.entity.MedicalRecord;
 import nidhal.hospitalmanagement.service.MedicalRecordServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@RequestMapping("/medicalRecords")
 public class MedicalRecordController {
 
     private final MedicalRecordServiceImpl medicalRecordService;
@@ -17,16 +17,23 @@ public class MedicalRecordController {
         this.medicalRecordService = medicalRecordService;
     }
 
-    @GetMapping("/medicalRecord/{id}")
-    public String getMedicalRecord(@PathVariable long id, Model model) {
-        MedicalRecord medicalRecord = medicalRecordService.getMedicalRecordById(id);
-        model.addAttribute("medicalRecord", medicalRecord);
-        return "medicalRecord";
+    @PostMapping("update")
+    public String saveMedicalRecord(@ModelAttribute("medicalRecord") MedicalRecord medicalRecord) {
+        medicalRecordService.updateMedicalRecord(medicalRecord);
+        return "redirect:/patients";
     }
 
+    @GetMapping("{id}")
+    public String renderTheMedicalRecordForm(@PathVariable long id, Model model) {
+        MedicalRecord medicalRecord = medicalRecordService.getMedicalRecordByPatientId(id);
+        model.addAttribute("medicalRecord", medicalRecord);
+        return "medical-record/document";
+    }
 
-    @GetMapping("/medicalRecord")
-    public String medicalRecord() {
-        return "medicalRecord";
+    @GetMapping("update/{id}")
+    public String renderMedicalRecordForm(Model model, @PathVariable long id) {
+        MedicalRecord medicalRecord = medicalRecordService.getMedicalRecordById(id);
+        model.addAttribute("medicalRecord", medicalRecord);
+        return "medical-record/form";
     }
 }

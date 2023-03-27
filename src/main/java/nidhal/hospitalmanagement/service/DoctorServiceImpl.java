@@ -19,24 +19,24 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor saveDoctor(Doctor doctor) {
+    public void saveDoctor(Doctor doctor) {
         // create the local date time
         Date currentDate = new Date();
 
         doctor.setCreatedAt(currentDate);
 
-        return doctorRepository.save(doctor);
+        doctorRepository.save(doctor);
     }
 
     @Override
-    public Doctor updateDoctor(Doctor doctor) {
+    public void updateDoctor(Doctor doctor) {
 
         // Get the doctor object from the database
         Doctor existingDoctor = doctorRepository
                 .findById(doctor.getId())
                 .orElse(null);
 
-        if (existingDoctor == null) return null;
+        if (existingDoctor == null) return;
 
         else {
             // Update the properties of the doctor object with the data from the form submission
@@ -55,7 +55,7 @@ public class DoctorServiceImpl implements DoctorService {
         }
 
         // Save the updated patient object to the database
-        return doctorRepository.save(existingDoctor);
+        doctorRepository.save(existingDoctor);
 
     }
 
@@ -70,11 +70,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor getDoctorByEmail(String email) {
-        return doctorRepository.findByEmail(email);
-    }
-
-    @Override
     public Page<Doctor> getAllDoctors(Pageable pageable) {
         return doctorRepository.findAll(pageable);
     }
@@ -82,11 +77,6 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Page<Doctor> getDoctorsBySpeciality(DoctorSpeciality specialization, Pageable pageable) {
         return doctorRepository.findBySpecialization(specialization, pageable);
-    }
-
-    @Override
-    public Page<Doctor> getAllDoctorsByFirstNameOrLastName(String firstOrLastName, Pageable pageable) {
-        return doctorRepository.findByFirstNameContainingOrLastNameContaining(firstOrLastName, pageable);
     }
 
     @Override

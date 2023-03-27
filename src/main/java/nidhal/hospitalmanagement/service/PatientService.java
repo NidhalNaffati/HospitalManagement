@@ -8,15 +8,13 @@ import java.util.Map;
 
 public interface PatientService {
 
-    Patient savePatient(Patient patient);
+    void savePatient(Patient patient);
 
-    Patient updatePatient(Patient patient);
+    void updatePatient(Patient patient);
 
     void deletePatient(long id);
 
     Patient getPatientById(Long id);
-
-    Patient getPatientByEmail(String email);
 
     Page<Patient> getAllPatients(Pageable pageable);
 

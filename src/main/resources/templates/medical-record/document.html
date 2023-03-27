@@ -19,6 +19,14 @@
                             <h4 class="text-primary fw-bold">Medical Record Information</h4>
                         </div>
                         <div class="col-auto">
+                            <a class="btn btn-primary btn-sm float-end" id="update-btn"
+                               th:href="${'/medicalRecords/update/'+ medicalRecord.id}">
+                                <i class="fa fa-update" aria-hidden="true">
+                                    Update
+                                </i>
+                            </a>
+                        </div>
+                        <div class="col-auto">
                             <a class="btn btn-primary btn-sm float-end" id="download-btn">
                                 <i class="fa fa-download" aria-hidden="true">
                                     Download
@@ -34,12 +42,12 @@
 
                         <p>
                             <strong>medical record ID:</strong>
-                            <span th:text="${medicalRecord.patient.id}"></span>
+                            <span th:text="${medicalRecord.id}"></span>
                         </p>
 
                         <p>
                             <strong>patient ID:</strong>
-                            <span th:text="${medicalRecord.id}"></span>
+                            <span th:text="${medicalRecord.patient.id}"></span>
                         </p>
 
                         <p>

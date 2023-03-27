@@ -25,7 +25,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient savePatient(Patient patient) {
+    public void savePatient(Patient patient) {
 
         // create the local date time
         Date currentDate = new Date();
@@ -42,18 +42,17 @@ public class PatientServiceImpl implements PatientService {
 
         medicalRecordService.saveMedicalRecord(medicalRecord);
 
-        return savedPatient;
     }
 
     @Override
-    public Patient updatePatient(Patient patient) {
+    public void updatePatient(Patient patient) {
 
         // Get the patient object from the database
         Patient existingPatient = patientRepository
                 .findById(patient.getId())
                 .orElse(null);
 
-        if (existingPatient == null) return null;
+        if (existingPatient == null) return;
 
         else {
             // create the local date time
@@ -72,7 +71,7 @@ public class PatientServiceImpl implements PatientService {
 
 
         // Save the updated patient object to the database
-        return patientRepository.save(existingPatient);
+        patientRepository.save(existingPatient);
     }
 
     @Override
@@ -89,11 +88,6 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository
                 .findById(id)
                 .orElse(null);
-    }
-
-    @Override
-    public Patient getPatientByEmail(String email) {
-        return null;
     }
 
     @Override

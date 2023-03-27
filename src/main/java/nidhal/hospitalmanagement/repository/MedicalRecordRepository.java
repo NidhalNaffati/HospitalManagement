@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Long> {
 
@@ -17,4 +19,7 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Lo
 
     @Query("SELECT COUNT(m) FROM MedicalRecord m")
     long countMedicalRecords();
+
+    @Query("SELECT m FROM MedicalRecord m WHERE m.patient.id = ?1")
+    Optional<MedicalRecord> getMedicalRecordByPatientId(long patientId);
 }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="~{common/common :: common-header}">
+    <title>Medical Record</title>
+</head>
+
+<body>
+<div id="wrapper">
+    <nav th:replace="~{common/common :: side-bar}"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="~{common/common :: top-bar}"></nav>
+            <div class="container-fluid">
+                <h3 class="text-center text-primary mb-4">Medical Record Information</h3>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form th:action="@{/medicalRecords/update}" th:object="${medicalRecord}" method="post">
+                            <div class="row">
+                                <input type="hidden" th:field="*{id}"/>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="height">
+                                            <strong>Height</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="height" th:field="*{height}">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="weight">
+                                            <strong>Weight</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="weight" th:field="*{weight}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gender">
+                                            <strong>Blood Type</strong>
+                                        </label>
+                                        <select class="form-select" id="gender" th:field="*{bloodType}">
+                                            <option th:value="A_POSITIVE">A_POSITIVE</option>
+                                            <option th:value="A_NEGATIVE">A_NEGATIVE</option>
+                                            <option th:value="B_POSITIVE">B_POSITIVE</option>
+                                            <option th:value="B_NEGATIVE">B_NEGATIVE</option>
+                                            <option th:value="AB_POSITIVE">AB_POSITIVE</option>
+                                            <option th:value="AB_NEGATIVE">AB_NEGATIVE</option>
+                                            <option th:value="O_POSITIVE">O_POSITIVE</option>
+                                            <option th:value="O_NEGATIVE">O_NEGATIVE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="bloodPressure">
+                                            <strong>Blood Pressure</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="bloodPressure"
+                                               th:field="*{bloodPressure}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="heartRate">
+                                            <strong>Heart Rate</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="heartRate"
+                                               th:field="*{heartRate}">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="respiratoryRate">
+                                            <strong>Respiration Rate</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="respiratoryRate"
+                                               th:field="*{respiratoryRate}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="sugarLevel">
+                                            <strong>Sugar Level</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="sugarLevel"
+                                               th:field="*{sugarLevel}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="surgeries">
+                                            <strong>Surgeries</strong>
+                                        </label>
+                                        <input class="form-control" type="number" id="surgeries"
+                                               th:field="*{surgeries}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{common/common :: footer}"></footer>
+    </div>
+</div>
+<div th:replace="~{common/common :: body-bottom-scripts}"></div>
+</body>
+</html>

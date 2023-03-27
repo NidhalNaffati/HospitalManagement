@@ -14,9 +14,6 @@ import java.util.List;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
-    @Query("SELECT d FROM Doctor d WHERE d.email = ?1")
-    Doctor findByEmail(String email);
-
     @Modifying
     @Query("DELETE FROM Doctor d WHERE d.id = ?1")
     void deleteById(Long id);
@@ -26,10 +23,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query("SELECT DISTINCT d.speciality FROM Doctor d")
     List<DoctorSpeciality> findAllSpecialities();
-
-    @Query("SELECT d FROM Doctor d WHERE d.firstName LIKE %?1% OR d.lastName LIKE %?1%")
-    Page<Doctor> findByFirstNameContainingOrLastNameContaining(String firstOrLastName, Pageable pageable);
-
 
     @Query("SELECT COUNT(d) FROM Doctor d WHERE d.speciality = ?1")
     int countBySpeciality(DoctorSpeciality specialization);
