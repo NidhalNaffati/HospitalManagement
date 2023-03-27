@@ -1,5 +1,8 @@
 server:
-  port: 9090
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
 
 spring:
   datasource:
@@ -7,7 +10,6 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 
   jpa:
     show-sql: true
@@ -25,7 +27,6 @@ spring:
     baseline-on-migrate: true
     locations: classpath:db/migration
     schemas: HospitalManagementDB
-
 
   devtools:
     livereload:
