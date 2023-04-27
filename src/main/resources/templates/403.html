@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="~{common/common :: common-header}">
+    <title>Error</title>
+</head>
+
+<body>
+<div id="wrapper">
+    <nav th:replace="~{common/common :: side-bar}"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav th:replace="~{common/common :: top-bar}"></nav>
+            <div class="container-fluid">
+                <div class="text-center mt-5">
+                    <div class="error mx-auto" th:data-text="404" style="height: 150;">
+                        <p class="m-0" th:text="403"></p>
+                    </div>
+                    <p class="text-dark mb-5 lead">Access Denied </p>
+                    <p class="text-danger-50 mb-0">get the fuck out...</p>
+                    <a href="/"> ← Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{common/common :: footer}"></footer>
+    </div>
+</div>
+<div th:replace="~{common/common :: body-bottom-scripts}"></div>
+</body>
+</html>
